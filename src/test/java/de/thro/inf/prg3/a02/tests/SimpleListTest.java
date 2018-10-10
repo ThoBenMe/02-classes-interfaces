@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
@@ -60,6 +61,7 @@ public class SimpleListTest {
 	@Test
 	void testFilterLambda(){
 		SimpleListImpl result = (SimpleListImpl) testList.filter(o -> ((int)o) % 2 == 0);
+		assertNotEquals(0, result.size());
 		for(Object o : result){
 			int i = (int)o;
 			assertTrue(i % 2 == 0);
