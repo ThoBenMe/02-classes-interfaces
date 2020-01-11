@@ -8,6 +8,14 @@ import java.util.Iterator;
  */
 public class SimpleListImpl implements SimpleList, Iterable {
 
+    /**
+     * 2. implemented Element as static inner class
+     */
+    private static class Element {
+        private Object item;
+        private Element next;
+    }
+
     @Override
     public void add(Object o) {
         if (head == null) {
@@ -31,36 +39,35 @@ public class SimpleListImpl implements SimpleList, Iterable {
         return size;
     }
 
+    /**
+     *  3. Filter method
+     *
+     * @param filter filter
+     * @return result
+     */
     @Override
-    public SimpleList filter(SimpleFilter filter) {
+    public SimpleList filter(SimpleFilter filter){
         SimpleListImpl result = new SimpleListImpl();
 
-        if (head == null) {
+        if(head == null){
             return result;
         }
 
-        Element temp = head;
-        while (temp.next != null) {
-            if (filter.include(temp.item)) {
-                result.add(temp.item);
-            }
-            temp = temp.next;
-        }
+        Element tmp = head;
 
+        while(tmp.next != null){
+            if(filter.include(tmp.item)) {
+                result.add(tmp.item);
+            }
+            tmp = tmp.next;
+        }
         return result;
     }
+
 
     @Override
     public java.util.Iterator iterator() {
         return new SimpleIteratorImpl();
-    }
-
-    /**
-     * 2. implemented Element as static inner class
-     */
-    private static class Element {
-        private Object item;
-        private Element next;
     }
 
     private Element head = null;
@@ -68,11 +75,10 @@ public class SimpleListImpl implements SimpleList, Iterable {
     private int size = 0;
 
     /**
-     * Interface Iterator
+     * Nested Class Iterator
      */
     public class SimpleIteratorImpl implements Iterator {
         private int counter = 0;
-
         private Element element = head;
 
         @Override
@@ -82,10 +88,15 @@ public class SimpleListImpl implements SimpleList, Iterable {
 
         @Override
         public Object next() {
-            Element temp = element;
+            Element tmp = element;
             element = element.next;
             ++counter;
-            return temp.item;
+            return tmp.item;
         }
     }
+
 }
+
+
+
+

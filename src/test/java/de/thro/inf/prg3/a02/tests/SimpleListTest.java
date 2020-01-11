@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+
 /**
  * @author Peter Kurfer
  * Created on 10/6/17.
@@ -64,7 +65,7 @@ public class SimpleListTest {
 		assertNotEquals(0, result.size());
 		for(Object o : result){
 			int i = (int)o;
-			assertTrue(i % 2 == 0);
+			assertEquals(0, i % 2);
 		}
 	}
 }
